@@ -6,19 +6,25 @@
 #    By: dbriant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 15:25:26 by dbriant           #+#    #+#              #
-#    Updated: 2025/02/17 09:31:01 by dbriant          ###   ########.fr        #
+#    Updated: 2025/02/20 21:11:08 by dbriant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprint.a
-CC = cc
-CFLAGS = -Werror -Wextra -Wall
+NAME	= libftprint.a
+CC		= cc
+CFLAGS	= -Werror -Wextra -Wall
+DELALL	= *.a *.o
+SRC		= test.c $(wildcard libft/*.c)
+OBJS    = $(SRC:.c=.o)
 
-DELALL = libft/*.o libft/*.a $(NAME)
-makesubdirs:
-		$(MAKE) -C libft;
+all : $(NAME)
+$(NAME) : $(OBJS)
+	ar rcs $@ $^
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 fclean:
-	rm libft/*.o libft/*.a
+	cd libft/ && make fclean
 clean:
-	rm $(DELALL)
+	cd libft/ && make clean
+	-rm $(DELALL)
 .PHONY: clean fclean makesubdirs
