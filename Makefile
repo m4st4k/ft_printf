@@ -10,23 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprint.a
-CC	= cc
+NAME	= libftprintf.a
+CC		= cc
 CFLAGS	= -Werror -Wextra -Wall
 DELALL	= *.a *.o
 STLIB	= libft/libft.a
-OBJS    = $(.c=.o)
+SRCS    = test.c
+OBJS    = $(SRCS:.c=.o)
 
 all : $(NAME)
-
 $(NAME) : $(OBJS)
 	$(MAKE) -C libft
-	$(CC) $(CFLAGS) main.c $(STLIB) -o main
+	ar rc $(NAME) $(OBJS)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 fclean:
 	cd libft/ && make fclean
+	-rm $(NAME)
 clean:
 	cd libft/ && make clean
 	-rm $(DELALL)
-.PHONY: clean fclean makesubdirs
+re: fclean all
+.PHONY: clean fclean all re

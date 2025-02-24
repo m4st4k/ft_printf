@@ -6,7 +6,7 @@
 #    By: dbriant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 21:48:28 by dbriant           #+#    #+#              #
-#    Updated: 2025/02/15 10:45:30 by dbriant          ###   ########.fr        #
+#    Updated: 2025/02/24 15:56:51 by dbriant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,4 +56,5 @@ fclean : clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
 
