@@ -6,15 +6,12 @@
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:24 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/11 03:17:20 by dbriant          ###   ########.fr       */
+/*   Updated: 2025/03/11 03:32:01 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "ft_printf.h"
-#include <limits.h>
+#include <stdarg.h>
 
 static	int	ft_printchar(size_t *count, char c)
 {
