@@ -6,7 +6,7 @@
 #    By: dbriant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 15:25:26 by dbriant           #+#    #+#              #
-#    Updated: 2025/02/24 15:24:11 by dbriant          ###   ########.fr        #
+#    Updated: 2025/02/26 21:51:51 by dbriant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,20 +15,20 @@ CC		= cc
 CFLAGS	= -Werror -Wextra -Wall
 DELALL	= *.a *.o
 STLIB	= libft/libft.a
-SRCS    = test.c
+SRCS    = ft_printf.c ft_ptr.c ft_x.c ft_prnthx.c
 OBJS    = $(SRCS:.c=.o)
 
 all : $(NAME)
 $(NAME) : $(OBJS)
-	$(MAKE) -C libft
-	ar rc $(NAME) $(OBJS)
+	$(MAKE) -C libft 
+	ar rc $(NAME) libft/*.o $(OBJS)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 fclean:
 	cd libft/ && make fclean
-	-rm $(NAME)
+	-rm -f $(NAME)
 clean:
 	cd libft/ && make clean
-	-rm $(DELALL)
+	-rm -f $(DELALL)
 re: fclean all
 .PHONY: clean fclean all re
