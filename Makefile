@@ -15,7 +15,7 @@ CC		= cc
 CFLAGS	= -Werror -Wextra -Wall
 DELALL	= *.a *.o
 STLIB	= libft/libft.a
-SRCS    = ft_printf.c ft_ptr.c ft_x.c ft_prnthx.c
+SRCS    = ft_printf.c ft_p.c ft_xX.c ft_prnthx.c ft_di.c
 OBJS    = $(SRCS:.c=.o)
 
 all : $(NAME)

@@ -15,3 +15,6 @@ extern	int	ft_printf(const char *str, ...);
 extern	int	ft_printptr(void *addr);
 extern	int	ft_inttohexstr(size_t i, size_t iscap);
 extern	void	ft_printhex(size_t i, char *ptr, size_t arrlen, size_t iscap);
+extern	int	ft_printint(int val);
+extern	int	ft_printunint(unsigned int val);
+extern	int	ft_printstr(char *str);

@@ -6,7 +6,7 @@
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:24 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/13 14:46:24 by dbriant          ###   ########.fr       */
+/*   Updated: 2025/03/15 22:11:01 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
@@ -21,7 +21,7 @@ static	int	ft_printchar(size_t *count, char c)
 	return (1);
 }
 
-static	int	ft_printstr(char *str)
+int	ft_printstr(char *str)
 {
 	if (str == NULL)
 	{
@@ -30,19 +30,6 @@ static	int	ft_printstr(char *str)
 	}
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
-}
-
-static	int	ft_printint(int val)
-{
-	char	*t;
-	size_t	len;
-
-	len = 0;
-	t = ft_itoa(val);
-	len += ft_printstr(t);
-	free(t);
-	t = NULL;
-	return (len);
 }
 
 static	int	ft_firstargcheck(const char *str, va_list list, size_t *count)
@@ -57,10 +44,14 @@ static	int	ft_firstargcheck(const char *str, va_list list, size_t *count)
 		*count += ft_printint(va_arg(list, int));
 	if (ft_strncmp(str, "%i", 2) == 0)
 		*count += ft_printint(va_arg(list, int));
+	if (ft_strncmp(str, "%u", 2) == 0)
+		*count += ft_printunint(va_arg(list, unsigned int));
 	if (ft_strncmp(str, "%x", 2) == 0)
 		*count += ft_inttohexstr(va_arg(list, unsigned int), 0);
 	if (ft_strncmp(str, "%X", 2) == 0)
 		*count += ft_inttohexstr(va_arg(list, unsigned int), 1);
+	if (ft_strncmp(str, "%%", 2) == 0)
+		ft_printchar(count, '%');
 	return (2);
 }
 
@@ -88,8 +79,8 @@ int	ft_printf(const char *str, ...)
 /*
 int	main(void)
 {
-	printf("%i\n", 010);
-	ft_printf("%i\n", 010);
+	printf("%%\n");
+	ft_printf("%%\n");
 	return (0);
 }
 */
