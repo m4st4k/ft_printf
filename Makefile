@@ -16,12 +16,17 @@ CFLAGS	= -Werror -Wextra -Wall
 DELALL	= *.a *.o
 STLIB	= libft/libft.a
 SRCS    = ft_printf.c ft_p.c ft_xX.c ft_prnthx.c ft_di.c
+BONUSSRCS	= ft_printf_bonus.c
 OBJS    = $(SRCS:.c=.o)
+BONUSOBJS = $(BONUSSRCS:.c=.o)
 
 all : $(NAME)
 $(NAME) : $(OBJS)
 	$(MAKE) -C libft 
 	ar rc $(NAME) libft/*.o $(OBJS)
+bonus : $(OBJS) $(BONUSOBJS)
+	$(MAKE) -C libft 
+	ar rc $(NAME) libft/*.o $(OBJS) $(BONUSOBJS)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 fclean:

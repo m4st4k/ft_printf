@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stddef.h>
+#include <stdarg.h>
 
 extern	int	ft_printf(const char *str, ...);
+extern	int	ft_firstargcheck(const char *str, va_list list, size_t *count);
+extern	int ft_bonusargcheck(const char *str, va_list list, size_t *count);
 extern	int	ft_printptr(void *addr);
 extern	int	ft_inttohexstr(size_t i, size_t iscap);
 extern	void	ft_printhex(size_t i, char *ptr, size_t arrlen, size_t iscap);
