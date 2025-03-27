@@ -12,12 +12,15 @@
 #include <stddef.h>
 #include <stdarg.h>
 
-extern	int	ft_printf(const char *str, ...);
-extern	int	ft_firstargcheck(const char *str, va_list list, size_t *count);
-extern	int ft_bonusargcheck(const char *str, va_list list, size_t *count);
-extern	int	ft_printptr(void *addr);
-extern	int	ft_inttohexstr(size_t i, size_t iscap);
-extern	void	ft_printhex(size_t i, char *ptr, size_t arrlen, size_t iscap);
-extern	int	ft_printint(int val);
-extern	int	ft_printunint(unsigned int val);
-extern	int	ft_printstr(char *str);
+int		ft_printf(const char *str, ...);
+char	*ft_firstargcheck(const char *str, va_list list, size_t *count);
+size_t	ft_checkifnum(const char *str);
+char	*c_ft_chartostr(va_list list, size_t *count);
+char	*s_ft_strtostr(va_list list);
+char	*p_ft_ptrtostr(va_list list);
+char	*ft_sizettohex(size_t val);
+char	*d_ft_inttostr(va_list list);
+char	*u_ft_uninttostr(va_list list);
+char	*ft_smallhextostr(va_list list);
+char	*ft_bighextostr(va_list list);
+char	*ft_perctostr(void);

@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_xX.c                                            :+:      :+:    :+:   */
+/*   c_ft_chartostr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 17:41:05 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/15 17:41:13 by dbriant          ###   ########.fr       */
+/*   Created: 2025/03/24 23:58:32 by dbriant           #+#    #+#             */
+/*   Updated: 2025/03/27 02:58:03 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "../libft/libft.h"
+#include "../ft_printf.h"
 #include <stdlib.h>
+#include <stdarg.h>
 
-int	ft_inttohexstr(size_t i, size_t iscap)
+char	*c_ft_chartostr(va_list list, size_t *count)
 {
-	char	*ptr;
-	size_t	arrlen;
-	size_t	val;
+	char	*str;
+	char	chr;
 
-	if (!i)
+	chr = va_arg(list, int);
+	str = malloc(sizeof(char) + 1);
+	if (str == NULL)
+		return (NULL);
+	if (chr == 0)
 	{
-		ft_putstr_fd("0", 1);
-		return (1);
+		write(1, &chr, 1);
+		(*count)++;
 	}
-	arrlen = 0;
-	val = i;
-	while (i)
-	{
-		i /= 16;
-		arrlen++;
-	}
-	ptr = malloc(arrlen + 1);
-	if (ptr == NULL)
-		return (0);
-	ptr[arrlen] = '\0';
-	ft_printhex(val, ptr, arrlen, iscap);
-	free(ptr);
-	ptr = NULL;
-	return (arrlen);
+	str[0] = chr;
+	str[1] = '\0';
+	return (str);
 }
