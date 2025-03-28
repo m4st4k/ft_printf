@@ -6,11 +6,12 @@
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:24 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/27 03:18:06 by dbriant          ###   ########.fr       */
+/*   Updated: 2025/03/28 01:52:50 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
 #include "ft_printf.h"
+#include "helperfunc_bonus/ft_helperfunc_bonus.h"
 #include <stdarg.h>
 #include <stdlib.h>
 
@@ -34,35 +35,36 @@ char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 		return (ft_bighextostr(list));
 	else if (ft_strncmp(str, "%", 1) == 0)
 		return (ft_perctostr());
-/*
-	else if (ft_strncmp(str, "%0", 1) == 0)
-		return (ft_prependzero(list));
-*/
-	return (NULL);
+	else if (ft_strncmp(str, "0", 1) == 0)
+		return (ft_prependzero(list, str, count));
+	return (ft_perctostr());
+	//return (NULL);
+}
+
+static	size_t	ft_defaultcheck(const char *str, va_list list, size_t *count)
+{
+	size_t	i;
+	char	*stro;
+
+	i = 0;
+	stro = ft_firstargcheck(&(str[i + 1]), list, count);
+	ft_putstr_fd(stro, 1);
+	(*count) += (size_t)ft_strlen(stro);
+	free(stro);
+	if ((ft_strncmp(&(str[i]), "%0", 2) == 0))
+		return (ft_checkifnum(&(str[i + 1])) + 2);
+	return (2);
 }
 
 static	void	generalargcheck(const char *str, va_list list, size_t *count)
 {
 	size_t	i;
-	size_t	val;
-	char	*stro;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((ft_strncmp(&(str[i]), "%0", 2) == 0))
-		{
-			val = ft_checkifnum(&(str[i + 1]));
-			i = i + val + 1;
-		}
-		else if (str[i] == '%')
-		{
-			stro = ft_firstargcheck(&(str[i + 1]), list, count);
-			ft_putstr_fd(stro, 1);
-			(*count) += (size_t)ft_strlen(stro);
-			free(stro);
-			i += 2;
-		}
+		if (str[i] == '%')
+			i += ft_defaultcheck(&(str[i]), list, count);
 		else
 		{
 			write(1, &str[i], 1);
@@ -88,9 +90,8 @@ int	ft_printf(const char *str, ...)
 /*
 int	main(void)
 {
-	printf("Return: %d\n", printf("%x\n", 0));
-	printf("Return me: %d\n", ft_printf("%x\n", 0));
-	//printf("%s", ft_sizettohex(a));
+	printf("Return: %d\n", printf(" %05d \n", -194));
+	printf("Return me: %d\n", ft_printf(" %05d \n", -194));
 	return (0);
 }
 */
