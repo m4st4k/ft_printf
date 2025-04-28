@@ -9,11 +9,14 @@
 /*   Updated: 2025/03/11 03:02:31 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stddef.h>
-#include <stdarg.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stddef.h>
+# include <stdarg.h>
 
 int		ft_printf(const char *str, ...);
 char	*ft_firstargcheck(const char *str, va_list list, size_t *count);
+char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count);
 size_t	ft_checkifnum(const char *str);
 char	*c_ft_chartostr(va_list list, size_t *count);
 char	*s_ft_strtostr(va_list list);
@@ -24,3 +27,6 @@ char	*u_ft_uninttostr(va_list list);
 char	*ft_smallhextostr(va_list list);
 char	*ft_bighextostr(va_list list);
 char	*ft_perctostr(void);
+size_t	ft_formatspecsize(const char *str);
+
+#endif

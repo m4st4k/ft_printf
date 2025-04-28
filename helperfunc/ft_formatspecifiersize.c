@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_helperfunc_bonus.h                              :+:      :+:    :+:   */
+/*   ft_formatspecifiersize.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 07:46:52 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/27 12:07:38 by dbriant          ###   ########.fr       */
+/*   Created: 2025/03/28 15:07:06 by dbriant           #+#    #+#             */
+/*   Updated: 2025/03/28 15:57:57 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdarg.h>
-#include "../libft/libft.h"
-#include "../ft_printf.h"
 
-char	*ft_prependzero(char *stro, const char *str);
-char	*ft_prependspace(char *stro, const char *str);
-char	*ft_hashtag(char *str, char c);
-char	*ft_space(char *str, const char *stra);
-char	*rightalignment(char *str);
+#include "../ft_printf.h"
+#include <stdio.h>
+
+size_t	ft_formatspecsize(const char *str)
+{
+	size_t	i;
+	size_t	b;
+	char	*convspecifier;
+
+	i = 0;
+	convspecifier = "cspdiuxX%";
+	while (str[i] != '\0')
+	{
+		b = 0;
+		while (b < 10)
+		{
+			if (str[i + 1] == convspecifier[b++])
+				return (i + 2);
+		}
+		i++;
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:24 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/28 01:52:50 by dbriant          ###   ########.fr       */
+/*   Updated: 2025/04/28 22:18:07 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
@@ -14,6 +14,29 @@
 #include "helperfunc_bonus/ft_helperfunc_bonus.h"
 #include <stdarg.h>
 #include <stdlib.h>
+
+char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
+{
+	size_t	numcount;
+	char	*stro;
+
+	numcount = ft_formatspecsize(str);
+	stro = ft_firstargcheck(&(str[numcount - 1]), list, count);
+	return (stro);
+	if (ft_strncmp(str, "-", 1) == 0)
+		return (ft_prependspace(stro, str));
+	else if (ft_strncmp(str, "#", 1) == 0)
+                return (ft_hashtag(stro, str[numcount - 1]));
+	else if (ft_strncmp(str, "0", 1) == 0)
+		return (ft_prependzero(stro, str));
+	else if (ft_strncmp(str, " ", 1) == 0)
+		return (ft_space(stro, str));
+	else if (ft_strncmp(str, ".", 1) == 0)
+		return (ft_prependzero(stro, str));
+	else if (ft_isdigit(str[0]) == 1 && str[0] != '0')
+		return (ft_prependspace(stro, str));
+	return (ft_perctostr());
+}
 
 char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 {
@@ -35,25 +58,21 @@ char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 		return (ft_bighextostr(list));
 	else if (ft_strncmp(str, "%", 1) == 0)
 		return (ft_perctostr());
-	else if (ft_strncmp(str, "0", 1) == 0)
-		return (ft_prependzero(list, str, count));
-	return (ft_perctostr());
-	//return (NULL);
+	return (NULL);
 }
 
-static	size_t	ft_defaultcheck(const char *str, va_list list, size_t *count)
+static	void	ft_defaultcheck(const char *str, va_list list, size_t *count)
 {
 	size_t	i;
 	char	*stro;
 
 	i = 0;
 	stro = ft_firstargcheck(&(str[i + 1]), list, count);
+	if (stro == NULL)
+		stro = ft_firstargcheck_bonus(&(str[i + 1]), list, count);
 	ft_putstr_fd(stro, 1);
 	(*count) += (size_t)ft_strlen(stro);
 	free(stro);
-	if ((ft_strncmp(&(str[i]), "%0", 2) == 0))
-		return (ft_checkifnum(&(str[i + 1])) + 2);
-	return (2);
 }
 
 static	void	generalargcheck(const char *str, va_list list, size_t *count)
@@ -64,7 +83,10 @@ static	void	generalargcheck(const char *str, va_list list, size_t *count)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
-			i += ft_defaultcheck(&(str[i]), list, count);
+		{
+			ft_defaultcheck(&(str[i]), list, count);
+			i += ft_formatspecsize(&(str[i]));
+		}
 		else
 		{
 			write(1, &str[i], 1);
@@ -87,11 +109,10 @@ int	ft_printf(const char *str, ...)
 	va_end(list);
 	return (len);
 }
-/*
+
 int	main(void)
 {
-	printf("Return: %d\n", printf(" %05d \n", -194));
-	printf("Return me: %d\n", ft_printf(" %05d \n", -194));
+	printf("\nReturn: %d\n", printf("%--90.11i", 1218643716));
+	printf("\nReturn me: %d\n", ft_printf("%--90.11i", 1218643716));
 	return (0);
 }
-*/

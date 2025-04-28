@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_helperfunc_bonus.h                              :+:      :+:    :+:   */
+/*   ft_precicion_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 07:46:52 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/27 12:07:38 by dbriant          ###   ########.fr       */
+/*   Created: 2025/04/03 16:41:35 by dbriant           #+#    #+#             */
+/*   Updated: 2025/04/04 11:05:03 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdarg.h>
-#include "../libft/libft.h"
-#include "../ft_printf.h"
 
-char	*ft_prependzero(char *stro, const char *str);
-char	*ft_prependspace(char *stro, const char *str);
-char	*ft_hashtag(char *str, char c);
-char	*ft_space(char *str, const char *stra);
-char	*rightalignment(char *str);
+char	*ft_precision(va_list list, const char *str, size_t *count)
+{
+	size_t	numcount;
+	size_t	width;
+
+	numcount = ft_formatspecsize(str);
+	stro = ft_firstargcheck(&(str[numcount - 1]), list, count);
+}

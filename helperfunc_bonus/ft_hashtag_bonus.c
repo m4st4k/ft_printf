@@ -1,35 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_ft_chartostr.c                                   :+:      :+:    :+:   */
+/*   ft_hashtag_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 23:58:32 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/27 02:58:03 by dbriant          ###   ########.fr       */
+/*   Created: 2025/04/04 12:36:24 by dbriant           #+#    #+#             */
+/*   Updated: 2025/04/04 13:03:46 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../libft/libft.h"
 #include "../ft_printf.h"
-#include "../helperfunc_bonus/ft_helperfunc_bonus.h"
 #include <stdlib.h>
-#include <stdarg.h>
 
-char	*c_ft_chartostr(va_list list, size_t *count)
+static	char	*ft_addprefix(char *dest, size_t len, char c)
 {
-	char	*str;
-	char	chr;
-
-	chr = va_arg(list, int);
-	str = malloc(sizeof(char) + 1);
-	if (str == NULL)
+	dest = malloc(((sizeof(char) * len) + 2) + 1);
+	if (dest == NULL)
 		return (NULL);
-	if (chr == 0)
+	dest[0] = '0';
+	dest[1] = c;
+	dest[len + 2] = '\0';
+	return (dest);
+}
+
+char	*ft_hashtag(char *str, char c)
+{
+	size_t	len;
+	size_t	i;
+	char	*stro;
+
+	if (*str == '0')
+		return (str);
+	i = 0;
+	len = ft_strlen(str);
+	stro = ft_addprefix(str, len, c);
+	if (stro == NULL)
+		return (NULL);
+	while (str[i] != '\0')
 	{
-		write(1, &chr, 1);
-		(*count)++;
+		stro[i + 2] = str[i];
+		i++;
 	}
-	str[0] = chr;
-	str[1] = '\0';
-	return (str);
+	free(str);
+	return (stro);
 }
