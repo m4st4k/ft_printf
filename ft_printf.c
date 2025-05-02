@@ -19,7 +19,6 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 
 	numcount = ft_formatspecsize(str);
 	stro = ft_firstargcheck(&(str[numcount - 1]), list, count);
-	/*
 	if (ft_memchr(str, '.', numcount - 1))
 		stro = ft_prependzero_dot(stro, str);
 	if (ft_memchr(str, '-', numcount - 1))
@@ -35,7 +34,6 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 		stro = ft_prependspace_space_plus(stro, str);
 	if (ft_isdigit(str[0]) == 1 && str[0] != '0')
 		stro = ft_prependspace_width(stro, str);
-	*/
 	return (stro);
 }
 
