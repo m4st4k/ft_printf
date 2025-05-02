@@ -6,14 +6,11 @@
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:24 by dbriant           #+#    #+#             */
-/*   Updated: 2025/04/28 22:18:07 by dbriant          ###   ########.fr       */
+/*   Updated: 2025/05/02 14:31:09 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/libft.h"
+
 #include "ft_printf.h"
-#include "helperfunc_bonus/ft_helperfunc_bonus.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
 char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 {
@@ -22,20 +19,24 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 
 	numcount = ft_formatspecsize(str);
 	stro = ft_firstargcheck(&(str[numcount - 1]), list, count);
+	/*
+	if (ft_memchr(str, '.', numcount - 1))
+		stro = ft_prependzero_dot(stro, str);
+	if (ft_memchr(str, '-', numcount - 1))
+		stro = ft_prependspace_minus(stro, str);
+	if ((*str == '0') && ((ft_memchr(str, '-', numcount - 1) == NULL)
+			&& (ft_memchr(str, '.', numcount - 1) == NULL)))
+		stro = ft_prependzero_zero(stro, str);
+	if (*str == '#')
+		stro = ft_hashtag(stro, str, str[numcount - 1]);
+	if (ft_memchr(str, ' ', numcount - 1))
+		stro = ft_prependspace_space(stro, str);
+	if (ft_memchr(str, '+', numcount - 1))
+		stro = ft_prependspace_space_plus(stro, str);
+	if (ft_isdigit(str[0]) == 1 && str[0] != '0')
+		stro = ft_prependspace_width(stro, str);
+	*/
 	return (stro);
-	if (ft_strncmp(str, "-", 1) == 0)
-		return (ft_prependspace(stro, str));
-	else if (ft_strncmp(str, "#", 1) == 0)
-                return (ft_hashtag(stro, str[numcount - 1]));
-	else if (ft_strncmp(str, "0", 1) == 0)
-		return (ft_prependzero(stro, str));
-	else if (ft_strncmp(str, " ", 1) == 0)
-		return (ft_space(stro, str));
-	else if (ft_strncmp(str, ".", 1) == 0)
-		return (ft_prependzero(stro, str));
-	else if (ft_isdigit(str[0]) == 1 && str[0] != '0')
-		return (ft_prependspace(stro, str));
-	return (ft_perctostr());
 }
 
 char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
@@ -47,9 +48,9 @@ char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 	else if (ft_strncmp(str, "p", 1) == 0)
 		return (p_ft_ptrtostr(list));
 	else if (ft_strncmp(str, "d", 1) == 0)
-		return (d_ft_inttostr(list));
+		return (d_ft_inttostr(list, str));
 	else if (ft_strncmp(str, "i", 1) == 0)
-		return (d_ft_inttostr(list));
+		return (d_ft_inttostr(list, str));
 	else if (ft_strncmp(str, "u", 1) == 0)
 		return (u_ft_uninttostr(list));
 	else if (ft_strncmp(str, "x", 1) == 0)
@@ -109,10 +110,11 @@ int	ft_printf(const char *str, ...)
 	va_end(list);
 	return (len);
 }
-
+/*
 int	main(void)
 {
-	printf("\nReturn: %d\n", printf("%--90.11i", 1218643716));
-	printf("\nReturn me: %d\n", ft_printf("%--90.11i", 1218643716));
+	printf("\nReturn: %d\n", printf("%+10d", 0));
+	printf("\nReturn me: %d\n", ft_printf("%+10d", 0));
 	return (0);
 }
+*/

@@ -10,11 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../ft_printf.h"
-#include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
-static	char	*ft_paddspaces(size_t width, char *str)
+static	char	*ft_paddspaces_minus(size_t width, char *str)
 {
 	size_t	len;
 	char	*newstr;
@@ -35,18 +32,75 @@ static	char	*ft_paddspaces(size_t width, char *str)
 	return (newstr);
 }
 
-char	*ft_prependspace(char *stro, const char *str)
+static	char	*ft_paddspaces_width(size_t width, char *str)
+{
+	size_t	strlen;
+	size_t	i;
+	char	*new;
+
+	i = 0;
+	strlen = ft_strlen(str);
+	new = malloc((sizeof(char) * width) + 1);
+	new[width] = '\0';
+	while (width > strlen)
+	{
+		new[i++] = ' ';
+		width--;
+	}
+	while (strlen)
+	{
+		new[i++] = *str++;
+		strlen--;
+	}
+	free(str - width);
+	return (new);
+}
+
+char	*ft_prependspace_width(char *stro, const char *str)
+{
+	size_t	width;
+	size_t	strlen;
+	char	*new;
+
+	width = ft_atoi(str);
+	strlen = ft_strlen(stro);
+	if (width <= strlen)
+		return (stro);
+	new = ft_paddspaces_width(width, stro);
+	return (new);
+}
+
+char	*ft_prependspace_space(char *stro, const char *str)
+{
+	size_t	strlen;
+	size_t	width;
+	size_t	numcount;
+	char	*new;
+
+	new = NULL;
+	numcount = ft_formatspecsize(str);
+	width = ft_formatspecsizebonus(str, ' ');
+	strlen = ft_strlen(stro);
+	if ((*stro != '-') && str[numcount - 1] != 's')
+		new = ft_paddspaces_width(strlen + 1, stro);
+	if (new != NULL)
+		new = ft_prependspace_width(new, &(str[width]));
+	else
+		new = ft_prependspace_width(stro, &(str[width]));
+	return (new);
+}
+
+char	*ft_prependspace_minus(char *stro, const char *str)
 {
 	size_t	width;
 	size_t	numcount;
+	size_t	start;
 
-	if (ft_isdigit(str[0]) == 1 && str[0] != '0')
-		width = ft_atoi(&(str[0]));
-	else
-		width = ft_atoi(&(str[1]));
+	start = ft_formatspecsizebonus(str, '-');
+	width = ft_atoi(str + start);
 	numcount = ft_formatspecsize(str);
 	if ((str[numcount - 1] == 'c') && (*stro == 0))
 		width--;
-	stro = ft_paddspaces(width, stro);
+	stro = ft_paddspaces_minus(width, stro);
 	return (stro);
 }

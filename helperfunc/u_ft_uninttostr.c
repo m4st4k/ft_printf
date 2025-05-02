@@ -9,10 +9,8 @@
 /*   Updated: 2025/03/27 02:55:55 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../libft/libft.h"
+
 #include "../ft_printf.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
 static	size_t	ft_divunsigbase10(unsigned int val)
 {

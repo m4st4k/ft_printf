@@ -9,10 +9,8 @@
 /*   Updated: 2025/03/25 04:31:20 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../libft/libft.h"
+
 #include "../ft_printf.h"
-#include <stdlib.h>
-#include <stdarg.h>
 
 char	*s_ft_strtostr(va_list list)
 {

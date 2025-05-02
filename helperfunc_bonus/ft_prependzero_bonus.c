@@ -9,11 +9,8 @@
 /*   Updated: 2025/04/04 11:43:43 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../ft_printf.h"
-#include "../libft/libft.h"
-#include "ft_helperfunc_bonus.h"
-#include <stdlib.h>
-#include <stdarg.h>
 
 static	void	ft_ifstrneg(char *temp, char *stro, size_t i)
 {
@@ -26,7 +23,7 @@ static	void	ft_ifstrneg(char *temp, char *stro, size_t i)
 	}
 }
 
-static	char	*ft_paddzeros(size_t width, char *stro)
+static	char	*ft_paddzeros_zero(size_t width, char *stro)
 {
 	size_t	strolen;
 	size_t	amountofzeros;
@@ -40,8 +37,8 @@ static	char	*ft_paddzeros(size_t width, char *stro)
 		temp = malloc((sizeof(char) * width) + 1);
 		temp[width] = '\0';
 		amountofzeros = width - strolen;
-		if (*stro == '-')
-			temp[i++] = '-';
+		if (*stro == '-' || *stro == '+')
+			temp[i++] = *stro;
 		while (amountofzeros)
 		{
 			temp[i++] = '0';
@@ -54,21 +51,45 @@ static	char	*ft_paddzeros(size_t width, char *stro)
 	return (stro);
 }
 
-char	*ft_prependzero(char *stro, const char *str)
+static	char	*ft_paddzeros_dot(size_t width, char *stro)
+{
+	size_t	strlen;
+
+	strlen = ft_strlen(stro);
+	while (width < strlen)
+		stro[--strlen] = '\0';
+	return (stro);
+}
+
+char	*ft_prependzero_dot(char *stro, const char *str)
 {
 	size_t	width;
 	size_t	numcount;
+	size_t	start;
 	char	*newstr;
 
-	if (str[1] == '-')
-		return (ft_prependspace(stro, &(str[1])));
-	if (str[0] == '.')
-		width = ft_atoi(&(str[1]));
-	else
-		width = ft_atoi(str);
 	numcount = ft_formatspecsize(str);
-	if ((str[numcount - 1] == 's') && (*stro == '\0'))
-		width = 1;
-	newstr = ft_paddzeros(width, stro);
+	start = ft_formatspecsizebonus(str, '.');
+	width = ft_atoi(str + start);
+	if (str[numcount - 1] == 's')
+		return (ft_paddzeros_dot(width, stro));
+	if (*stro == '-')
+		width++;
+	if (*stro == '0' && str[numcount - 1] != 's' && width == 0)
+	{
+		stro[0] = '\0';
+		return (stro);
+	}
+	newstr = ft_paddzeros_zero(width, stro);
+	return (newstr);
+}
+
+char	*ft_prependzero_zero(char *stro, const char *str)
+{
+	size_t	width;
+	char	*newstr;
+
+	width = ft_atoi(str);
+	newstr = ft_paddzeros_zero(width, stro);
 	return (newstr);
 }

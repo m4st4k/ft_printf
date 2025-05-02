@@ -9,10 +9,8 @@
 /*   Updated: 2025/03/27 02:57:24 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../libft/libft.h"
+
 #include "../ft_printf.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
 static	char	*ft_addprefix(char *dest, size_t len)
 {

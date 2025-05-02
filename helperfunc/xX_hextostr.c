@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../ft_printf.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
 static	char	*ft_iszero(void)
 {

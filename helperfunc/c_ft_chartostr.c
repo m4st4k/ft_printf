@@ -9,11 +9,8 @@
 /*   Updated: 2025/03/27 02:58:03 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../libft/libft.h"
+
 #include "../ft_printf.h"
-#include "../helperfunc_bonus/ft_helperfunc_bonus.h"
-#include <stdlib.h>
-#include <stdarg.h>
 
 char	*c_ft_chartostr(va_list list, size_t *count)
 {

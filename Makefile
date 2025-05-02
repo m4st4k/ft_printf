@@ -16,7 +16,7 @@ CFLAGS	= -Werror -Wextra -Wall
 DELALL	= *.a *.o
 STLIB	= libft/libft.a
 SRCS    = ft_printf.c helperfunc/c_ft_chartostr.c helperfunc/ft_countnum.c helperfunc/s_ft_strtostr.c \
-			helperfunc/p_ft_ptrtostr.c helperfunc/ft_tohex.c helperfunc/d_ft_inttostr.c helperfunc/u_ft_uninttostr.c helperfunc/xX_hextostr.c helperfunc/ft_perctostr.c helperfunc/ft_formatspecifiersize.c
+			helperfunc/p_ft_ptrtostr.c helperfunc/ft_tohex.c helperfunc/d_ft_inttostr.c helperfunc/u_ft_uninttostr.c helperfunc/xX_hextostr.c helperfunc/ft_perctostr.c helperfunc/ft_formatspecifiersize.c 
 BONUSSRCS	= helperfunc_bonus/ft_prependzero_bonus.c helperfunc_bonus/ft_prependspace_bonus.c helperfunc_bonus/ft_hashtag_bonus.c \
 				helperfunc_bonus/ft_space_bonus.c helperfunc_bonus/ft_alligment.c
 OBJS    = $(SRCS:.c=.o)

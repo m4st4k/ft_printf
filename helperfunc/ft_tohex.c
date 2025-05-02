@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../ft_printf.h"
-#include <stdlib.h>
 
 static	size_t	ft_divbase16(size_t val)
 {

@@ -9,7 +9,7 @@
 /*   Updated: 2025/03/28 15:34:53 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../libft/libft.h"
+
 #include "../ft_printf.h"
 
 size_t	ft_checkifnum(const char *str)

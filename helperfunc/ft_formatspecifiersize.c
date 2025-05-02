@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-#include <stdio.h>
 
 size_t	ft_formatspecsize(const char *str)
 {
@@ -32,4 +31,18 @@ size_t	ft_formatspecsize(const char *str)
 		i++;
 	}
 	return (1);
+}
+
+size_t	ft_formatspecsizebonus(const char *str, char b)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == b)
+			return (++i);
+		i++;
+	}
+	return (0);
 }

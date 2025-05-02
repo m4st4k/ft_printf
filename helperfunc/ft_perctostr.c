@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../ft_printf.h"
-#include <stdlib.h>
-#include <stdarg.h>
 
 char	*ft_perctostr(void)
 {
