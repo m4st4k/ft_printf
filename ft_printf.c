@@ -26,6 +26,9 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 	if ((*str == '0') && ((ft_memchr(str, '-', numcount - 1) == NULL)
 			&& (ft_memchr(str, '.', numcount - 1) == NULL)))
 		stro = ft_prependzero_zero(stro, str);
+	if ((*str == '0') && ((ft_memchr(str, '-', numcount - 1))
+			|| (ft_memchr(str, '.', numcount - 1))))
+		stro = ft_prependspace_width(stro, str);
 	if (*str == '#')
 		stro = ft_hashtag(stro, str, str[numcount - 1]);
 	if (ft_memchr(str, ' ', numcount - 1))
@@ -111,8 +114,8 @@ int	ft_printf(const char *str, ...)
 /*
 int	main(void)
 {
-	printf("\nReturn: %d\n", printf("%+10d", 0));
-	printf("\nReturn me: %d\n", ft_printf("%+10d", 0));
+	printf("\nReturn: %d\n", printf("%--78c%051.181x" ,35,316390971u));
+	printf("\nReturn me: %d\n", ft_printf("%--78c%051.181x" ,35,316390971u));
 	return (0);
 }
 */

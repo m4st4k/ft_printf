@@ -63,7 +63,7 @@ static	char	*ft_paddzeros_dot(size_t width, char *stro)
 
 char	*ft_prependzero_dot(char *stro, const char *str)
 {
-	size_t	width;
+	int		width;
 	size_t	numcount;
 	size_t	start;
 	char	*newstr;
@@ -71,6 +71,12 @@ char	*ft_prependzero_dot(char *stro, const char *str)
 	numcount = ft_formatspecsize(str);
 	start = ft_formatspecsizebonus(str, '.');
 	width = ft_atoi(str + start);
+	if (width < 0)
+		width = width * -1;
+	if ((str[numcount - 1] == 's' || str[numcount - 1] == 'p')
+		&& (!ft_strncmp(stro, "(null)", 6) || !ft_strncmp(stro, "(nill)", 6))
+		&& width != 0)
+		return (stro);
 	if (str[numcount - 1] == 's')
 		return (ft_paddzeros_dot(width, stro));
 	if (*stro == '-')
@@ -86,10 +92,12 @@ char	*ft_prependzero_dot(char *stro, const char *str)
 
 char	*ft_prependzero_zero(char *stro, const char *str)
 {
-	size_t	width;
+	int		width;
 	char	*newstr;
 
 	width = ft_atoi(str);
+	if (width < 0)
+		width = width * -1;
 	newstr = ft_paddzeros_zero(width, stro);
 	return (newstr);
 }
