@@ -45,7 +45,7 @@ char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 	if (ft_strncmp(str, "c", 1) == 0)
 		return (c_ft_chartostr(list, count));
 	else if (ft_strncmp(str, "s", 1) == 0)
-		return (s_ft_strtostr(list));
+		return (s_ft_strtostr(list, str));
 	else if (ft_strncmp(str, "p", 1) == 0)
 		return (p_ft_ptrtostr(list));
 	else if (ft_strncmp(str, "d", 1) == 0)
@@ -114,8 +114,8 @@ int	ft_printf(const char *str, ...)
 /*
 int	main(void)
 {
-	printf("\nReturn: %d\n", printf("%--78c%051.181x" ,35,316390971u));
-	printf("\nReturn me: %d\n", ft_printf("%--78c%051.181x" ,35,316390971u));
+	printf("\nReturn: %d\n", printf("%-5c", 0));
+	printf("\nReturn me: %d\n", ft_printf("%-5c", 0));
 	return (0);
 }
 */

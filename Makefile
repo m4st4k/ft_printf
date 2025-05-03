@@ -10,34 +10,52 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprintf.a
-CC		= cc
-CFLAGS	= -Werror -Wextra -Wall
-DELALL	= *.a *.o
-STLIB	= libft/libft.a
-SRCS    = ft_printf.c helperfunc/c_ft_chartostr.c helperfunc/ft_countnum.c helperfunc/s_ft_strtostr.c \
-			helperfunc/p_ft_ptrtostr.c helperfunc/ft_tohex.c helperfunc/d_ft_inttostr.c helperfunc/u_ft_uninttostr.c helperfunc/xX_hextostr.c helperfunc/ft_perctostr.c helperfunc/ft_formatspecifiersize.c 
-BONUSSRCS	= helperfunc_bonus/ft_prependzero_bonus.c helperfunc_bonus/ft_prependspace_bonus.c helperfunc_bonus/ft_hashtag_bonus.c \
-				helperfunc_bonus/ft_space_bonus.c helperfunc_bonus/ft_alligment.c
-OBJS    = $(SRCS:.c=.o)
-BONUSOBJS = $(BONUSSRCS:.c=.o)
+NAME    = libftprintf.a
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror
+DELALL  = *.a *.o
+LIBFT   = libft/libft.a
+LIBFT_DIR = libft
+SRCS    = ft_printf.c helperfunc/c_ft_chartostr.c helperfunc/ft_countnum.c \
+          helperfunc/s_ft_strtostr.c helperfunc/p_ft_ptrtostr.c \
+          helperfunc/ft_tohex.c helperfunc/d_ft_inttostr.c \
+          helperfunc/u_ft_uninttostr.c helperfunc/xX_hextostr.c \
+          helperfunc/ft_perctostr.c helperfunc/ft_formatspecifiersize.c
 
-all : $(NAME)
-$(NAME) : $(OBJS)
-	$(MAKE) -C libft 
-	ar rc $(NAME) libft/*.o $(OBJS)
-bonus : $(OBJS) $(BONUSOBJS)
-	$(MAKE) -C libft 
-	ar rc $(NAME) libft/*.o $(OBJS) $(BONUSOBJS)
-%.o : %.c
+BONUSSRCS = helperfunc_bonus/ft_prependzero_bonus.c \
+            helperfunc_bonus/ft_prependspace_bonus.c \
+            helperfunc_bonus/ft_hashtag_bonus.c \
+            helperfunc_bonus/ft_space_bonus.c \
+            helperfunc_bonus/ft_alligment.c
+
+OBJS        = $(SRCS:.c=.o)
+BONUSOBJS   = $(BONUSSRCS:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT)
+	ar rc $(NAME) $(LIBFT_DIR)/*.o $(OBJS)
+	ranlib $(NAME)
+
+bonus: $(OBJS) $(BONUSOBJS) $(LIBFT)
+	ar rc $(NAME) $(LIBFT_DIR)/*.o $(OBJS) $(BONUSOBJS)
+	ranlib $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
-fclean:
-	cd libft/ && make fclean
-	-rm -f $(DELALL) helperfunc/*.o helperfunc_bonus/*o
-	-rm -f $(NAME)
+
 clean:
-	cd libft/ && make clean
-	-rm -f $(DELALL) helperfunc/*.o helperfunc_bonus/*o
-	-rm -f $(DELALL)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -f $(OBJS) $(BONUSOBJS)
+
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
 re: fclean all
-.PHONY: clean fclean all re
+
+.PHONY: all clean fclean re bonus
+

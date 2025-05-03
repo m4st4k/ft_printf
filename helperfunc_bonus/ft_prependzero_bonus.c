@@ -73,10 +73,6 @@ char	*ft_prependzero_dot(char *stro, const char *str)
 	width = ft_atoi(str + start);
 	if (width < 0)
 		width = width * -1;
-	if ((str[numcount - 1] == 's' || str[numcount - 1] == 'p')
-		&& (!ft_strncmp(stro, "(null)", 6) || !ft_strncmp(stro, "(nill)", 6))
-		&& width != 0)
-		return (stro);
 	if (str[numcount - 1] == 's')
 		return (ft_paddzeros_dot(width, stro));
 	if (*stro == '-')
