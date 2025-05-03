@@ -6,11 +6,18 @@
 /*   By: dbriant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 23:58:32 by dbriant           #+#    #+#             */
-/*   Updated: 2025/03/27 02:58:03 by dbriant          ###   ########.fr       */
+/*   Updated: 2025/05/03 13:17:02 by dbriant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+static	const char	*ft_returnpercent(const char	*str)
+{
+	while (*str != '%')
+		str--;
+	return (++str);
+}
 
 char	*c_ft_chartostr(va_list list, size_t *count, const char *str)
 {
@@ -22,10 +29,9 @@ char	*c_ft_chartostr(va_list list, size_t *count, const char *str)
 	new = malloc(sizeof(char) + 1);
 	if (new == NULL)
 		return (NULL);
+	str = ft_returnpercent(str);
 	width = ft_atoi(str);
-	if (width < 0)
-		width = width * -1;
-	if (chr == 0 && !width)
+	if (chr == 0 && width <= 0)
 	{
 		write(1, &chr, 1);
 		(*count)++;

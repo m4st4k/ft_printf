@@ -14,7 +14,7 @@
 char	*ft_prependzero_zero(char *stro, const char *str);
 char	*ft_prependzero_dot(char *stro, const char *str);
 char	*ft_prependspace_minus(char *stro, const char *str);
-char	*ft_prependspace_width(char *stro, const char *str);
+char	*ft_prependspace_width(char *stro, const char *str, size_t *count);
 char	*ft_prependspace_space(char *stro, const char *str);
 char	*ft_prependspace_space_plus(char *stro, const char *str);
 size_t	ft_formatspecsizebonus(const char *str, char i);

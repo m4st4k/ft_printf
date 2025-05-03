@@ -28,7 +28,7 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 		stro = ft_prependzero_zero(stro, str);
 	if ((*str == '0') && ((ft_memchr(str, '-', numcount - 1))
 			|| (ft_memchr(str, '.', numcount - 1))))
-		stro = ft_prependspace_width(stro, str);
+		stro = ft_prependspace_width(stro, str, count);
 	if (*str == '#')
 		stro = ft_hashtag(stro, str, str[numcount - 1]);
 	if (ft_memchr(str, ' ', numcount - 1))
@@ -36,7 +36,7 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 	if (ft_memchr(str, '+', numcount - 1))
 		stro = ft_prependspace_space_plus(stro, str);
 	if (ft_isdigit(str[0]) == 1 && str[0] != '0')
-		stro = ft_prependspace_width(stro, str);
+		stro = ft_prependspace_width(stro, str, count);
 	return (stro);
 }
 
@@ -116,8 +116,8 @@ int	ft_printf(const char *str, ...)
 /*
 int	main(void)
 {
-	printf("\nReturn: %d\n", printf("%5c", '\0'));
-	printf("\nReturn me: %d\n", ft_printf("%5c", '\0'));
+	printf("\n%d\n", printf("{%3c}", 0));
+	printf("\n%d", ft_printf("{%3c}", 0));
 	return (0);
 }
 */

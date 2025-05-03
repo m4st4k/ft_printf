@@ -35,11 +35,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	ar rc $(NAME) $(LIBFT_DIR)/*.o $(OBJS)
-	ranlib $(NAME)
 
 bonus: $(OBJS) $(BONUSOBJS) $(LIBFT)
 	ar rc $(NAME) $(LIBFT_DIR)/*.o $(OBJS) $(BONUSOBJS)
-	ranlib $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)

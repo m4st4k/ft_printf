@@ -56,16 +56,23 @@ static	char	*ft_paddspaces_width(size_t width, char *str)
 	return (new);
 }
 
-char	*ft_prependspace_width(char *stro, const char *str)
+char	*ft_prependspace_width(char *stro, const char *str, size_t *count)
 {
 	int		width;
 	size_t	strlen;
+	size_t	numcount;
 	char	*new;
 
+	numcount = ft_formatspecsize(str);
 	width = ft_atoi(str);
 	if (width < 0)
 		width = width * -1;
 	strlen = ft_strlen(stro);
+	if (strlen == 0 && str[numcount - 1] == 'c' && width != 0)
+	{
+		width--;
+		(*count)++;
+	}
 	if ((size_t)width <= strlen)
 		return (stro);
 	new = ft_paddspaces_width(width, stro);
@@ -86,9 +93,9 @@ char	*ft_prependspace_space(char *stro, const char *str)
 	if ((*stro != '-') && str[numcount - 1] != 's')
 		new = ft_paddspaces_width(strlen + 1, stro);
 	if (new != NULL)
-		new = ft_prependspace_width(new, &(str[width]));
+		new = ft_prependspace_width(new, &(str[width]), 0);
 	else
-		new = ft_prependspace_width(stro, &(str[width]));
+		new = ft_prependspace_width(stro, &(str[width]), 0);
 	return (new);
 }
 

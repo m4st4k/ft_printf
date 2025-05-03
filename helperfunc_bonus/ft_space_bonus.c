@@ -24,6 +24,6 @@ char	*ft_prependspace_space_plus(char *stro, const char *str)
 	count = ft_atoi(&(str[width]));
 	if (!count)
 		return (stro);
-	new = ft_prependspace_width(stro, &(str[width]));
+	new = ft_prependspace_width(stro, &(str[width]), 0);
 	return (new);
 }

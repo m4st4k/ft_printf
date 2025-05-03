@@ -48,8 +48,8 @@ char	*ft_hashtag(char *str, const char *stro, char c)
 	if (*str != '0')
 		new = ft_addprefix(str, len, c);
 	if (count != 0 && new != NULL)
-		new = ft_prependspace_width(new, &(stro[width + 1]));
+		new = ft_prependspace_width(new, &(stro[width + 1]), 0);
 	else if (count != 0 && new == NULL)
-		new = ft_prependspace_width(str, &(stro[width + 1]));
+		new = ft_prependspace_width(str, &(stro[width + 1]), 0);
 	return (new);
 }
