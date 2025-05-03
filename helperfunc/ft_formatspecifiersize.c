@@ -33,6 +33,27 @@ size_t	ft_formatspecsize(const char *str)
 	return (1);
 }
 
+char	ft_isformat(const char *str)
+{
+	size_t	i;
+	size_t	b;
+	char	*convspecifier;
+
+	i = 0;
+	convspecifier = "cspdiuxX%";
+	while (str[i] != '\0')
+	{
+		b = 0;
+		while (b < 10)
+		{
+			if (str[i] == convspecifier[b++])
+				return (str[i]);
+		}
+		i++;
+	}
+	return (0);
+}
+
 size_t	ft_formatspecsizebonus(const char *str, char b)
 {
 	size_t	i;

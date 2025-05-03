@@ -12,21 +12,25 @@
 
 #include "../ft_printf.h"
 
-char	*c_ft_chartostr(va_list list, size_t *count)
+char	*c_ft_chartostr(va_list list, size_t *count, const char *str)
 {
-	char	*str;
+	char	*new;
 	char	chr;
+	int		width;
 
 	chr = va_arg(list, int);
-	str = malloc(sizeof(char) + 1);
-	if (str == NULL)
+	new = malloc(sizeof(char) + 1);
+	if (new == NULL)
 		return (NULL);
-	if (chr == 0)
+	width = ft_atoi(str);
+	if (width < 0)
+		width = width * -1;
+	if (chr == 0 && !width)
 	{
 		write(1, &chr, 1);
 		(*count)++;
 	}
-	str[0] = chr;
-	str[1] = '\0';
-	return (str);
+	new[0] = chr;
+	new[1] = '\0';
+	return (new);
 }

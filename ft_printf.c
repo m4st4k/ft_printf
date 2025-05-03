@@ -43,7 +43,7 @@ char	*ft_firstargcheck_bonus(const char *str, va_list list, size_t *count)
 char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 {
 	if (ft_strncmp(str, "c", 1) == 0)
-		return (c_ft_chartostr(list, count));
+		return (c_ft_chartostr(list, count, str));
 	else if (ft_strncmp(str, "s", 1) == 0)
 		return (s_ft_strtostr(list, str));
 	else if (ft_strncmp(str, "p", 1) == 0)
@@ -58,7 +58,7 @@ char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 		return (ft_smallhextostr(list));
 	else if (ft_strncmp(str, "X", 1) == 0)
 		return (ft_bighextostr(list));
-	else if (ft_strncmp(str, "%", 1) == 0)
+	else if (ft_strncmp(str, "%", 1) == 0 || ft_isformat(str) == '%')
 		return (ft_perctostr());
 	return (NULL);
 }
@@ -66,6 +66,7 @@ char	*ft_firstargcheck(const char *str, va_list list, size_t *count)
 static	void	ft_defaultcheck(const char *str, va_list list, size_t *count)
 {
 	size_t	i;
+	size_t	strlen;
 	char	*stro;
 
 	i = 0;
@@ -73,7 +74,8 @@ static	void	ft_defaultcheck(const char *str, va_list list, size_t *count)
 	if (stro == NULL)
 		stro = ft_firstargcheck_bonus(&(str[i + 1]), list, count);
 	ft_putstr_fd(stro, 1);
-	(*count) += (size_t)ft_strlen(stro);
+	strlen = ft_strlen(stro);
+	(*count) += strlen;
 	free(stro);
 }
 
@@ -114,8 +116,8 @@ int	ft_printf(const char *str, ...)
 /*
 int	main(void)
 {
-	printf("\nReturn: %d\n", printf("%-5c", 0));
-	printf("\nReturn me: %d\n", ft_printf("%-5c", 0));
+	printf("\nReturn: %d\n", printf("%5c", '\0'));
+	printf("\nReturn me: %d\n", ft_printf("%5c", '\0'));
 	return (0);
 }
 */

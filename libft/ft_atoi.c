@@ -36,6 +36,8 @@ static	char	*ft_ignoreprint(const char *neg)
 		}
 		i++;
 	}
+	while (((*neg == '-') || (*neg == '+')) && !ft_isdigit(*(neg + 1)))
+		neg++;
 	return ((char *)neg);
 }
 
@@ -50,18 +52,11 @@ int	ft_atoi(const char *nptr)
 	nptr = ft_ignoreprint(nptr);
 	isneg = ft_isnegative(nptr);
 	if (!isneg || *nptr == '\0')
-	{
 		return (0);
-	}
 	else if (isneg != 3)
-	{
 		nptr++;
-	}
 	while (ft_isdigit(nptr[i]))
-	{
-		num = (nptr[i] - '0') + (num * 10);
-		i++;
-	}
+		num = (nptr[i++] - '0') + (num * 10);
 	if (isneg == 1)
 		num = -num;
 	return (num);
