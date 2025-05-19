@@ -28,7 +28,6 @@ SRCS    = ft_printf.c helperfunc/c_ft_chartostr.c helperfunc/ft_countnum.c \
 	helperfunc_bonus/ft_alligment.c
 
 OBJS        = $(SRCS:.c=.o)
-BONUSOBJS   = $(BONUSSRCS:.c=.o)
 
 all: $(NAME)
 
